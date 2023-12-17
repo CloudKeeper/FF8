@@ -34,6 +34,8 @@ from evennia.settings_default import *
 # This is the name of your game. Make it catchy!
 SERVERNAME = "FF8"
 
+# The module holds the text for the connection screen.
+CONNECTION_SCREEN_MODULE = "features.connection_screen"
 
 ######################################################################
 # Settings given in secret_settings.py override those in this file.
