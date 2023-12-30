@@ -1,3 +1,3 @@
-17/12 - Connection Screen completed
-    feature/connection_screen
-    server/serttings
+# 17/12 - Connection Screen completed
+
+# 31/12 - Plugged in Room Detail system.
