@@ -7,9 +7,9 @@ at to recieve a more detailed description.
 INSTALLATION:
 1. Have Room typeclass inherit from DetailMixin()
     from evennia import DefaultRoom
-    from features.room_details import DetailMixin
+    from features.room_details import DetailRoomMixin
     
-    class Room(DetailMixin, DefaultRoom):
+    class Room(DetailRoomMixin, DefaultRoom):
         pass
         
 2. Ovverride the vanilla look command with the CmdDetailLook()
@@ -28,7 +28,7 @@ from evennia import utils, DefaultRoom, CmdSet, default_cmds
 from django.conf import settings
 _SEARCH_AT_RESULT = utils.object_from_module(settings.SEARCH_AT_RESULT)
 
-class DetailMixin():
+class DetailRoomMixin():
     """
     This is a mixin that provides object functionality for details.
     """

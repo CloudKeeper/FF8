@@ -6,8 +6,8 @@ Rooms are simple container objects that have no location of their own.
 """
 
 from evennia import DefaultRoom
-from features.room_details import DetailMixin
+from features.room_details import DetailRoomMixin
 
-class Room(DetailMixin, DefaultRoom):
+class Room(DetailRoomMixin, DefaultRoom):
 
     pass
