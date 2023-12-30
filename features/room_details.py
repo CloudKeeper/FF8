@@ -4,8 +4,11 @@ This is a Room mixin and command to implement Room Detials.
 Details are non-object descriptions stored on the room which a player can look
 at to recieve a more detailed description.
 
+VARIABLES:
+    obj.db.details = {"detail name":"detail message",..}
+
 INSTALLATION:
-1. Have Room typeclass inherit from DetailMixin()
+1. Have Room typeclass inherit from DetailRoomMixin()
     from evennia import DefaultRoom
     from features.room_details import DetailRoomMixin
     
@@ -22,6 +25,11 @@ INSTALLATION:
             super().at_cmdset_creation()
             self.add(detail_system.CmdDetailLook)
 
+USE:
+    room.db.details = {}
+    room.db.details["detail"] = ("Test Detail")
+    
+    >look detail # Should return "Test Detail"
 """
 
 from evennia import utils, DefaultRoom, CmdSet, default_cmds
