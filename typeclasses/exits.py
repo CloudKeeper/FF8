@@ -8,7 +8,8 @@ for allowing Characters to traverse the exit to its destination.
 """
 from evennia.objects.objects import DefaultExit
 from features.exit_delay import DelayedExitMixin
+from features.exit_seethrough import SeeThroughExitMixin
 
-class Exit(DelayedExitMixin, DefaultExit):
+class Exit(SeeThroughExitMixin, DelayedExitMixin, DefaultExit):
 
     pass
