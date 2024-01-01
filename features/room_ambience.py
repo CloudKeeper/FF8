@@ -68,8 +68,7 @@ class AmbientObjectMixin():
         """
         In the basic typeclass, merely returns the raw ambient_msgs dictionary.
         """
-        msgs = self.db.ambient_msgs
-        return msgs if msgs else {}
+        return self.attributes.get("ambient_msgs", default = {})
 
 class AmbientChararacterMixin():
     """
@@ -90,10 +89,10 @@ class AmbientChararacterMixin():
         Collects the ambient messages from the characters worn equipment and 
         adds them to the characters own messages
         """
-        msgs = self.db.ambient_msgs
+        msgs = self.attributes.get("ambient_msgs", default = {})
         # Append equipment messages here.
         # Append junction messages here.
-        return msgs if msgs else {}
+        return msgs
 
 
 class AmbientRoomMixin():
@@ -110,8 +109,7 @@ class AmbientRoomMixin():
         Collects the ambient messages from room contents and 
         adds them to the Rooms own messages.
         """
-        msgs = self.db.ambient_msgs 
-        msgs = msgs if msgs else {}
+        msgs = self.attributes.get("ambient_msgs", default = {})
         for obj in self.contents_get():
             try:
                 msgs.update(obj.return_ambient_msgs())

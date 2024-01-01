@@ -4,7 +4,7 @@ This is an Exit mixin which delays a character leaving after using the exit.
 If a player stops or poses whilst leaving, it stops the exit process.
 
 INSTALLATION:
-1. Have Room typeclass inherit from DelayedExitMixin()
+1. Have Exit typeclass inherit from DelayedExitMixin()
     from features.exit_delay import DelayedExitMixin
     class Exit(DelayedExitMixin, DefaultExit):
         pass
