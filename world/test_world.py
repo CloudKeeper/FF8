@@ -35,6 +35,6 @@ room2.db.ambient_msgs["Ambient Message 2"] = 1
 room2.db.ambient_msgs["Ambient Message 3"] = 1
 
 room2_exit = create_object("typeclasses.exits.Exit", key="Room 1", location=room2, destination=room1)
-room2_exit.db.delay = 5
+room2_exit.db.delay = 0
 
 caller.location = room1
