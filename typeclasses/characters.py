@@ -9,7 +9,8 @@ creation commands.
 """
 from evennia.objects.objects import DefaultCharacter
 from features.room_ambience import AmbientChararacterMixin
+from features.character_magic import MagicCharacterMixin
 
-class Character(AmbientChararacterMixin, DefaultCharacter):
+class Character(MagicCharacterMixin, AmbientChararacterMixin, DefaultCharacter):
 
     pass
