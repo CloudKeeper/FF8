@@ -102,10 +102,11 @@ class HealthHandler(object):
             if obj.health.alive()
         """
         return bool(self.obj.db.health)
-    
-    def death(self):
+
+    def incapacitated(self):
         """
-        Implement Character death response.
+        Characters are incapacitated for a period of time before death to
+        allow for healing etc.
 
         """
         # TODO - Death code.
@@ -200,7 +201,7 @@ class HealthHandler(object):
         if self.obj.db.health > self.max:
             self.obj.db.health = self.max
         if self.obj.db.health <= 0:
-            self.death()
+            self.incapacitated()
             return
         
         return self.obj.db.health
@@ -233,7 +234,7 @@ class HealthHandler(object):
         if self.obj.db.health > self.max:
             self.obj.db.health = self.max
         if self.obj.db.health <= 0:
-            self.death()
+            self.incapacitated()
             return
         
         return self.obj.db.health
@@ -266,7 +267,7 @@ class HealthHandler(object):
         if self.obj.db.health > self.max:
             self.obj.db.health = self.max
         if self.obj.db.health <= 0:
-            self.death()
+            self.incapacitated()
             return
         
         return self.obj.db.health
@@ -286,7 +287,7 @@ class HealthHandler(object):
         if self.obj.db.health > self.max:
             self.obj.db.health = self.max
         if self.obj.db.health <= 0:
-            self.death()
+            self.incapacitated()
             return
         
         return self.obj.db.health
