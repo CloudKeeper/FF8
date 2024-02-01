@@ -1,29 +1,26 @@
 """
 Details
-This is a Room mixin and command to implement Room Detials.
-Details are non-object descriptions stored on the room which a player can look
-at to recieve a more detailed description.
+This is a Room mixin and command to implement Room Detials. Details are 
+non-object descriptions stored on the room which a player can look at to 
+recieve a more detailed description.
 
 VARIABLES:
     obj.db.details = {"detail name":"detail message",..}
 
 INSTALLATION:
-1. Have Room typeclass inherit from DetailRoomMixin()
-    from evennia import DefaultRoom
+1. Have Room typeclass inherit from DetailRoomMixin
     from features.room_details import DetailRoomMixin
-    
     class Room(DetailRoomMixin, DefaultRoom):
         pass
         
 2. Ovverride the vanilla look command with the CmdDetailLook()
-    from evennia import default_cmds
-    from features import room_details
+    from features.room_details import CmdDetailLook
     
     class CharacterCmdSet(default_cmds.CharacterCmdSet):
         key = "DefaultCharacter"
         def at_cmdset_creation(self):
             super().at_cmdset_creation()
-            self.add(detail_system.CmdDetailLook)
+            self.add(CmdDetailLook)
 
 USE:
     room.db.details = {}
@@ -55,14 +52,14 @@ class DetailRoomMixin():
 
 class CmdDetailLook(default_cmds.CmdLook):
     """
-    Looks at the room and on details
+    Observes your location or details at your location or objects
+    in your vicinity.
+    
     Usage:
         look
         look <obj>
         look <room detail>
         look *<account>
-    Observes your location, details at your location or objects
-    in your vicinity.
     """
 
     def func(self):
