@@ -8,7 +8,7 @@ ATTRIBUTES:
                          Example: {"Fire" : 100, "Blizzard" : 100}
 
 INSTALLATION:
-1. Have Room typeclass inherit from MagicCharacterMixin()
+1. Have Character typeclass inherit from MagicCharacterMixin()
     from features.character_magic import MagicCharacterMixin
     class Character(MagicCharacterMixin, DefaultCharacter):
         pass
@@ -132,7 +132,7 @@ class MagicHandler(object):
         Save reference to the parent typeclass and check appropriate attributes
 
         Args:
-            obj (typeclass): Pokemon typeclass.
+            obj (typeclass): Character typeclass.
         """
         self.obj = obj
 
@@ -165,7 +165,7 @@ class MagicHandler(object):
         """
         return len(self.obj.db.magic)
 
-    def __nonzero__(self):
+    def __bool__(self):
         """
         Support Boolean comparison for Magic held by Character.
 
@@ -186,7 +186,7 @@ class MagicHandler(object):
         """
         return self.obj.db.magic.get(magic, 0)
         
-    def add(self, magic, number = 1):
+    def add(self, magic, number = 1, quiet=False):
         """
         Increase selected <magic> by <number> respecting limit of 100.
 
@@ -196,17 +196,28 @@ class MagicHandler(object):
         if not magic in magic_list:
             msg = "Arguments passed to `MagicHandler.add()` caused an error."
             raise MagicException(msg)
-        
-        try:
-            self.obj.db.magic[magic] = self.obj.db.magic.get(magic, 0) + int(number)
-        except:
+            
+        if not int(number) > 0:
             msg = "Arguments passed to `MagicHandler.add()` caused an error."
             raise MagicException(msg)
         
-        if self.obj.db.magic[magic] > 100:
-            self.obj.db.magic[magic] = 100
-        if self.obj.db.magic[magic] < 1:
-            del self.obj.db.magic[magic]
+        current_number = self.obj.db.magic.get(magic, 0)
+        
+        if current_number == 100:
+            self.obj.msg("You are already fully stocked with {magic}.".format(magic=magic))
+            return False
+
+        final_number = current_number + int(number)
+
+        if final_number > 100:
+            final_number = 100
+            number = final_number - current_number
+        
+        self.obj.db.magic = final_number
+        
+        if not quiet:
+            self.obj.msg("You stocked {number} {magic}.".format(number=number, magic=magic))
+            
         return True
 
     def remove(self, magic, number = 1):
