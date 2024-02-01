@@ -15,8 +15,8 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
-from features import room_details
-
+from features.room_details import CmdDetailLook
+from features.object_drawpoint import CmdDraw
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -33,7 +33,8 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         """
         super().at_cmdset_creation()
 
-        self.add(room_details.CmdDetailLook)
+        self.add(CmdDetailLook)
+        self.add(CmdDraw)
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
