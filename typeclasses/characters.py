@@ -13,11 +13,15 @@ from features.character_magic import MagicCharacterMixin
 from features.character_health import HealthCharacterMixin
 from features.character_money import MoneyCharacterMixin
 from features.character_clothing import ClothingCharacterMixin
+from features.character_stats import StatCharacterMixin
+from features.character_roleplay import ContribRPCharacter
 
 class Character(HealthCharacterMixin, 
                 MagicCharacterMixin, 
                 AmbienceChararacterMixin, 
                 DefaultCharacter,
                 MoneyCharacterMixin,
-                ClothingCharacterMixin):
+                ClothingCharacterMixin,
+                StatCharacterMixin,
+                ContribRPCharacter):
     pass

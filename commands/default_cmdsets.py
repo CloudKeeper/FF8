@@ -17,6 +17,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 from evennia import default_cmds
 from features.room_details import CmdDetailLook
 from features.object_drawpoint import CmdDraw
+from features.character_roleplay import RPSystemCmdSet
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -35,6 +36,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
 
         self.add(CmdDetailLook)
         self.add(CmdDraw)
+        self.add(RPSystemCmdSet)
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
