@@ -12,10 +12,12 @@ from features.room_ambience import AmbienceChararacterMixin
 from features.character_magic import MagicCharacterMixin
 from features.character_health import HealthCharacterMixin
 from features.character_money import MoneyCharacterMixin
+from features.character_clothing import ClothingCharacterMixin
 
 class Character(HealthCharacterMixin, 
                 MagicCharacterMixin, 
                 AmbienceChararacterMixin, 
                 DefaultCharacter,
-                MoneyCharacterMixin):
+                MoneyCharacterMixin,
+                ClothingCharacterMixin):
     pass
