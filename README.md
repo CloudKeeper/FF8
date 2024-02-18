@@ -1,3 +1,19 @@
-17/12 - Connection Screen completed
-31/12 - Plugged in Room Detail system.
-31/12 - Plugged in Room Ambience system.
+                              __◞ >◞ ◜> 
+                           _◞     ╯   ╯◟◞ ◜> 
+                          (                 ◜  
+                            ◜◝              ╮ 
+                               \              ◡) 
+                             ◟◞             ◞ ╯ 
+                             ◝ ◜◝              ◡ ◜> 
+                                 ◡                ╭ ◜ 
+                                 \              ◟◞ 
+                                  \◞ ╮  ╭◝ ◟ ◞                  
+                                    Ɛ>   <3     
+                                     /   \ 
+                                     \   / 
+                                      \ /  
+                                       V 
+
+                       F I N A L   F A N T A S Y   V I I I 
+                       
+Work in Progress
