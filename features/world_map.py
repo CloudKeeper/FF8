@@ -74,11 +74,15 @@ def get_minimap(coordinates, mapsize):
     minimap = []
     
     # Build MiniMap
-    for row in range(int(y-(ysize-1)/2), int(y+(ysize-1)/2)+1):
-        for column in range(int(x-(xsize-1)/2), int(x+(xsize-1)/2)+1):
+    for row in range(y-ysize//2, y+ysize//2+1):
+        for column in range(x-xsize//2, x+xsize//2+1):
             line = line + get_position_graphic((column,row))
         minimap.append(line)
         line = ""
+
+    # Replace players location with 'X'
+    middle = minimap[len(minimap)//2]
+    minimap[len(minimap)//2]=middle[:len(middle)//2] + 'X' + middle[len(middle)//2 + 1:]
 
     minimap = "\n".join(minimap)
     return minimap
