@@ -1092,7 +1092,7 @@ class CmdPose(RPCommand):  # set current pose and default pose
 
         # set the pose
         if self.reset:
-            pose = target.db.pose_default
+            pose = target.attributes.get("pose_default", "is here.")
             target.db.pose = pose
         elif self.default:
             target.db.pose_default = pose

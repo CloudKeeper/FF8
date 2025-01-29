@@ -15,13 +15,18 @@ from features.character_money import MoneyCharacterMixin
 from features.character_clothing import ClothingCharacterMixin
 from features.character_stats import StatCharacterMixin
 from features.character_roleplay import ContribRPCharacter
+from features.npc_talking import ConversationMixin
 
-class Character(HealthCharacterMixin, 
-                MagicCharacterMixin, 
-                AmbienceChararacterMixin, 
-                DefaultCharacter,
+class Character(
+                HealthCharacterMixin,
+                MagicCharacterMixin,
+                AmbienceChararacterMixin,
                 MoneyCharacterMixin,
                 ClothingCharacterMixin,
                 StatCharacterMixin,
-                ContribRPCharacter):
+                ContribRPCharacter,
+                DefaultCharacter):
+    pass
+
+class NPC(ConversationMixin, Character):
     pass

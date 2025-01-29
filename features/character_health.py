@@ -26,7 +26,7 @@ class HealthCharacterMixin():
     """
 
     @lazy_property
-    def Health(self):
+    def health(self):
         """Handler for Character health."""
         return HealthHandler(self)
 
@@ -91,6 +91,7 @@ class HealthHandler(object):
         """
         return bool(self.obj.db.health)
 
+    @property
     def alive(self):
         """
         Returns Boolean for health of the Character.
@@ -103,7 +104,7 @@ class HealthHandler(object):
         """
         return bool(self.obj.db.health)
 
-    def incapacitated(self):
+    def dead(self):
         """
         Characters are incapacitated for a period of time before death to
         allow for healing etc.
@@ -201,7 +202,7 @@ class HealthHandler(object):
         if self.obj.db.health > self.max:
             self.obj.db.health = self.max
         if self.obj.db.health <= 0:
-            self.incapacitated()
+            self.dead()
             return
         
         return self.obj.db.health
@@ -363,4 +364,87 @@ class HealthHandler(object):
             obj.heatlh >= 5
         """
         return self.obj.db.health >= int(value)
-            
+
+# HEALTH TESTS -----------------------------------------------------------
+
+import unittest
+
+from evennia.utils.test_resources import EvenniaCommandTest
+from evennia.utils.utils import inherits_from
+
+class Health_Tests(EvenniaCommandTest):
+    """
+    Test Objects:
+        .account - A fake Account named “TestAccount”.
+        .account2 - A fake Account named “TestAccount2”.
+        .char1 - A Character linked to .account, named Char.
+        .char2 - A Character linked to .account2, named Char2.
+        .obj1 - A regular Object named “Obj”.
+        .obj2 - Another object named “Obj2”.
+        .room1 - A Room named “Room”. Both characters and objects are inside. 
+                 It has a description of “room_desc”.
+        .room2 - A Room named “Room2”. It is empty and has no set description.
+        .exit - An exit named “out” that leads from .room1 to .room2.
+        .script - A Script named “Script”. It’s an inert script.
+        .session - A fake Session that mimics a player connecting to the game. 
+                   It is used by .account1 and has a sessid of 1.
+        
+        .call() - a method for testing Evennia Commands. It allows you to compare 
+                  what the command returns to the player with what you expect.
+    
+    Test Functions:
+        .assertEqual(first, second, msg=None)
+        .assertNotEqual(first, second, msg=None)
+        .assertTrue(expr, msg=None)
+        .assertFalse(expr, msg=None)
+        .assertIs(first, second, msg=None)
+        .assertIsNot(first, second, msg=None)
+        .assertIsNone(expr, msg=None)
+        .assertIsNotNone(expr, msg=None)
+        .assertIn(member, container, msg=None)
+        .assertNotIn(member, container, msg=None)
+        .assertIsInstance(obj, cls, msg=None)
+        .assertNotIsInstance(obj, cls, msg=None)
+    """
+    
+    def test_HealthCharacterMixin(self):
+        # Check HealthCharacterMixin connected.
+        self.assertTrue(inherits_from(self.char1, HealthCharacterMixin))
+        
+        # Check Attribute Created.
+        self.assertEqual(self.char1.db.health, 1)
+        
+    def test_HealthHandler(self):
+        # Check 'if char1.health'
+        self.assertTrue(bool(self.char1.health))
+        
+        # Check 'if char1.health.alive'
+        self.assertTrue(self.char1.health.alive)
+        
+        # Check char1.health.current
+        self.assertEqual(self.char1.health.current, 1)
+        
+        # Check char1.health.add()
+        self.assertEqual(self.char1.health.add(1), 2)
+        
+        # Check char1.health.sub()
+        self.assertEqual(self.char1.health.sub(1), 1)
+        
+        # Check char1.health.add() past maximum
+        
+        # Check char1.health.sub()
+        # Check char1.health * 5
+        # Check char1.health / 5
+        # Check char1.health = 5
+        # Check char1.healt != 5
+        # Check char1.health < 5
+        # Check char1.health > 5
+        
+        # Check char1.health.dead()
+        # Check char1.health.max
+        # Check char1.health.reset()
+
+        # Check str(char1.health)
+        # Check char1.health.percentage
+
+        

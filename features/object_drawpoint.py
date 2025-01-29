@@ -78,9 +78,19 @@ class Drawpoint(Object):
         self.db.last_draw = time.time()
         self.db.recharge_rate = 2560
         self.db.draw_info = [
-            {"draw_rate":(0,0), "draw_msg":"There is nothing to draw here.", "ambience_msgs":{"Level 0":1}},
-            {"draw_rate":(3,8), "draw_msg":"A swirl of energy enters {caller}.", "ambience_msgs":{"Level 1":1}},
-            {"draw_rate":(6,15), "draw_msg":"A swirl of energy enters {caller}.", "ambience_msgs":{"Level 2":1}}]
+            
+            {"draw_rate":(0,0), 
+             "draw_msg":"There is nothing to draw here.", 
+              "ambience_msgs":{"Level 0":1}},
+              
+            {"draw_rate":(3,8), 
+             "draw_msg":"A swirl of energy enters {caller}.", 
+              "ambience_msgs":{"Level 1":1}},
+              
+            {"draw_rate":(6,15), 
+             "draw_msg":"A swirl of energy enters {caller}.", 
+              "ambience_msgs":{"Level 2":1}}
+        ]
         
         
     def recharge_point(self):
@@ -124,14 +134,19 @@ class Drawpoint(Object):
         if not draw_level:
             caller.msg(draw_info[draw_level]["draw_msg"].format(caller=caller, 
                                                                 location=caller.location, 
-                                                                drawpoint=self.get_display_name()))
+                                                                drawpoint=self.get_display_name(caller)))
             return
         
         # Send optional descriptive message to caller and location
         draw_msg = draw_info[draw_level]["draw_msg"]
         if draw_msg:
-            caller.msg(draw_msg.format(caller="you", location=caller.location, drawpoint=self.get_display_name()))
-            caller.location.msg_contents(draw_msg.format(caller=caller.get_display_name(), location=caller.location, drawpoint=self.get_display_name()), exclude=[caller])
+            caller.msg(draw_msg.format(caller="you", 
+                                       location=caller.location, 
+                                       drawpoint=self.get_display_name(caller)))
+            caller.location.msg_contents(draw_msg.format(caller=caller.get_display_name(), 
+                                                         location=caller.location, 
+                                                         drawpoint=self.get_display_name(caller)), 
+                                                         exclude=[caller])
         
         # Give caller Magic.
         magic = self.db.magic

@@ -18,6 +18,8 @@ from evennia import default_cmds
 from features.room_details import CmdDetailLook
 from features.object_drawpoint import CmdDraw
 from features.character_roleplay import RPSystemCmdSet
+from features.npc_talking import CmdTalk
+from features.character_clothing import CmdWear, CmdRemove
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -36,7 +38,10 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
 
         self.add(CmdDetailLook)
         self.add(CmdDraw)
+        self.add(CmdTalk)
         self.add(RPSystemCmdSet)
+        self.add(CmdWear)
+        self.add(CmdRemove)
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):
